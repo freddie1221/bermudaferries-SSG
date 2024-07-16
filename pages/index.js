@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Airtable from 'airtable';
 import Trip from '../components/Trip';
 import Filter from '../components/Filter';
+import TerminalFilter from '../components/TerminalFilter';
 
 export async function getStaticProps() {
   const base = new Airtable({ apiKey: process.env.AIRTABLE_PAT }).base('app4P77dJd7f0ffnK');
@@ -13,54 +14,53 @@ export async function getStaticProps() {
   const trips = records.map(record => ({
     id: record.id,
     fields: record.fields
-  }));
+  })).sort((a, b) => new Date(a.fields['Departure time']) - new Date(b.fields['Departure time']));
 
-  const terminals = [...new Set(trips.map(trip => trip.fields['Departure Terminal'][0]))];
+
+  const departures = [...new Set(trips.map(trip => trip.fields['Departure Terminal'][0]))];
 
   const routes = [...new Set(trips.map(trip => trip.fields['Route'][0]))];
-
-  const pinkTerminals = [...new Set(trips
-    .filter(trip => trip.fields['Route'][0] === 'Pink')
-    .map(trip => trip.fields['Departure Terminal'][0])
-  )];
-
-  const greenTerminals = [...new Set(trips
-    .filter(trip => trip.fields['Route'][0] === 'Green')
-    .map(trip => trip.fields['Departure Terminal'][0])
-  )];
-
-  console.log(pinkTerminals);
 
   return {
     props: {
       trips,
       routes,
-      terminals,
+      departures,
     },
   };
 }
 
-export default function Home({ routes, trips }) {
+export default function Home({ routes, trips  }) {
   
-  
-  const [selected, setSelected] = useState('Paget & Warwick');
+  const [selectedRoute, setSelectedRoute] = useState('Paget & Warwick');
 
-  const filteredTrips = selected
-  ? trips.filter(trip => trip.fields['Route'][0] === selected)
+  const routeTrips = selectedRoute
+  ? trips.filter(trip => trip.fields['Route'][0] === selectedRoute)
   : [];
 
-  const sortedTrips = filteredTrips.sort((a, b) => new Date(a.fields['Departure time']) - new Date(b.fields['Departure time']));
-  
+  const terminals = [...new Set(routeTrips.map(trip => trip.fields['Departure Terminal'][0]))];
+  const [selectedTerminal, setSelectedTerminal] = useState('Hamilton');
+
+  const filteredTrips = selectedTerminal
+  ? routeTrips.filter(trip => trip.fields['Departure Terminal'][0] === selectedTerminal)
+  : [];
+
+
   return (
     <div>
       <Filter
         options={routes}
-        selected={selected}
-        onSelect={setSelected}
+        selected={selectedRoute}
+        onSelect={setSelectedRoute}
+      />
+      <TerminalFilter
+        terminals={terminals}
+        selectedTerminal={selectedTerminal}
+        onSelectTerminal={setSelectedTerminal}
       />
 
       <div>
-        {sortedTrips.map(trip => (
+        {filteredTrips.map(trip => (
           <Trip 
             trip={trip}
             key={trip.id}
