@@ -54,9 +54,9 @@ export default function Home({ routes, trips }) {
   return (
     <div>
       <Filter
-        terminals={routes}
-        selectedTerminal={selected}
-        onSelectTerminal={setSelected}
+        options={routes}
+        selected={selected}
+        onSelect={setSelected}
       />
 
       <div>
