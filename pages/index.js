@@ -17,6 +17,8 @@ export async function getStaticProps() {
 
   const terminals = [...new Set(trips.map(trip => trip.fields['Departure Terminal'][0]))];
 
+  const routes = [...new Set(trips.map(trip => trip.fields['Route'][0]))];
+
   const pinkTerminals = [...new Set(trips
     .filter(trip => trip.fields['Route'][0] === 'Pink')
     .map(trip => trip.fields['Departure Terminal'][0])
@@ -31,20 +33,20 @@ export async function getStaticProps() {
 
   return {
     props: {
-      count,
       trips,
+      routes,
       terminals,
-      pinkTerminals,
-      greenTerminals,
     },
   };
 }
 
-export default function Home({ terminals, pinkTerminals, greenTerminals, trips }) {
-  const [selectedTerminal, setSelectedTerminal] = useState('Hamilton');
+export default function Home({ routes, trips }) {
+  
+  
+  const [selectedTerminal, setSelectedTerminal] = useState('Paget & Warwick');
 
   const filteredTrips = selectedTerminal
-  ? trips.filter(trip => trip.fields['Departure Terminal'][0] === selectedTerminal)
+  ? trips.filter(trip => trip.fields['Route'][0] === selectedTerminal)
   : [];
 
   const sortedTrips = filteredTrips.sort((a, b) => new Date(a.fields['Departure time']) - new Date(b.fields['Departure time']));
@@ -52,16 +54,10 @@ export default function Home({ terminals, pinkTerminals, greenTerminals, trips }
   return (
     <div>
       <Filter
-        terminals={pinkTerminals}
+        terminals={routes}
         selectedTerminal={selectedTerminal}
         onSelectTerminal={setSelectedTerminal}
       />
-      <Filter
-        terminals={greenTerminals}
-        selectedTerminal={selectedTerminal}
-        onSelectTerminal={setSelectedTerminal}
-      />
-
 
       <div>
         {sortedTrips.map(trip => (

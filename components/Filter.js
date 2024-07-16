@@ -6,11 +6,11 @@ export default function Filter({ terminals, selectedTerminal, onSelectTerminal }
 
   return (
     <div className="mb-8 border-b border-gray-200 pb-4">
-      <h3 className="text-lg font-serif font-medium text-gray-900 mb-4">Select Departure Terminal</h3>
+      <h3 className="text-lg font-serif font-medium text-gray-900 mb-4">Select Route</h3>
       <div className="flex flex-wrap gap-2">
       
-
         {terminals.map((terminal, index) => (
+          // iterate through terminals and create a button for each terminal
           <button
             key={index}
             onClick={() => onSelectTerminal(terminal)}
