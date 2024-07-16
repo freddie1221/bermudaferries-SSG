@@ -8,18 +8,17 @@ export default function Trip({ trip }) {
   let arrivalTime = secondsToTime(trip.fields['Arrival time'])
   let duration = trip.fields['Duration'] / 60
   let service = trip.fields['Service']
-  console.log(service)
 
   // Helper function to determine color based on service
-function getServiceColor(service) {
-  switch (service) {
-    case 'Monday - Friday': return 'teal';
-    case 'Everyday': return 'indigo';
-    case 'Weekends': return 'amber';
-    case 'Wednesday Harbour Night only': return 'rose';
-    default: return 'gray';
+  function getServiceColor(service) {
+    switch (service) {
+      case 'Monday - Friday': return 'teal';
+      case 'Everyday': return 'indigo';
+      case 'Weekends': return 'amber';
+      case 'Wednesday Harbour Night only': return 'rose';
+      default: return 'gray';
+    }
   }
-}
 
 // Component
 return (
