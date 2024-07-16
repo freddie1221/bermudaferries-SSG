@@ -43,10 +43,10 @@ export async function getStaticProps() {
 export default function Home({ routes, trips }) {
   
   
-  const [selectedTerminal, setSelectedTerminal] = useState('Paget & Warwick');
+  const [selected, setSelected] = useState('Paget & Warwick');
 
-  const filteredTrips = selectedTerminal
-  ? trips.filter(trip => trip.fields['Route'][0] === selectedTerminal)
+  const filteredTrips = selected
+  ? trips.filter(trip => trip.fields['Route'][0] === selected)
   : [];
 
   const sortedTrips = filteredTrips.sort((a, b) => new Date(a.fields['Departure time']) - new Date(b.fields['Departure time']));
@@ -55,8 +55,8 @@ export default function Home({ routes, trips }) {
     <div>
       <Filter
         terminals={routes}
-        selectedTerminal={selectedTerminal}
-        onSelectTerminal={setSelectedTerminal}
+        selectedTerminal={selected}
+        onSelectTerminal={setSelected}
       />
 
       <div>
