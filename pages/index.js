@@ -7,7 +7,6 @@ import Trip from '../components/Trip';
 import RouteFilter from '../components/RouteFilter';
 import DayFilter from '../components/DayFilter';
 import TerminalFilter from '../components/TerminalFilter';
-import TerminalArrivalFilter from '../components/TerminalArrivalFilter';
 
 export async function getStaticProps() {
   const base = new Airtable({ apiKey: process.env.AIRTABLE_PAT }).base('app4P77dJd7f0ffnK');
