@@ -48,11 +48,12 @@ export default function Home({ routes, trips, days  }) {
   ? routeTrips.filter(trip => trip.fields['Departure Terminal'][0] === selectedTerminal)
   : [];
 
-  const [selectedDay, setSelectedDay] = useState(days[0]);
-  const filteredTrips = selectedDay
-  ? terminalTrips.filter(trip => trip.fields['Day'].includes(selectedDay))
-  : [];
+  const getDay = (new Date().getDay() === 0 || new Date().getDay() === 6) ? "Weekend" : "Weekday";
+  const [selectedDay, setSelectedDay] = useState(getDay);
 
+  const filteredTrips = terminalTrips.filter(trip => trip.fields['Day'].includes(selectedDay))
+
+  
 
   return (
     <div>
