@@ -1,14 +1,21 @@
 
 export function secondsToTime(seconds) {
   
+  
+  
   const date = new Date(seconds * 1000);
-
 
   // Convert to ADT (UTC-3)
   date.setUTCHours(date.getUTCHours() - 3);
   
-  let hours = date.getUTCHours();
-  let minutes = date.getUTCMinutes();
+//  let hours = date.getUTCHours();
+//  let minutes = date.getUTCMinutes();
+//  const ampm = hours >= 12 ? 'pm' : 'am';
+
+  let hoursDecimal = seconds / 60 / 60
+  let hours = Math.floor(hoursDecimal);
+  let minutesDecimal = (hoursDecimal - hours) * 60;
+  let minutes = Math.round(minutesDecimal);
   const ampm = hours >= 12 ? 'pm' : 'am';
 
   hours = hours % 12;
