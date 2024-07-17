@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-export default function Filter({ options, selected, onSelect }) {
+export default function RouteFilter({ options, selected, onSelect }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative mb-8 font-serif p-2 py-4">
+    <div className="relative mb-2 font-serif p-2 py-4">
       <h3 className="text-2xl font-medium text-gray-900 mb-4 text-center">Select Route</h3>
       <div className="relative">
         <button
