@@ -55,6 +55,10 @@ export default function Home({ routes, trips, days  }) {
 
   return (
     <div>
+      <h1 className="text-3xl font-bold text-center my-4">Bermuda Ferry Schedule</h1>
+      <p className="text-lg text-center mb-6">
+        Welcome to the Bermuda ferry schedule for summer 2025. Find up-to-date information on routes, departure times, and services for all Bermuda ferry routes.
+      </p>
       <RouteFilter
         options={routes}
         selected={selectedRoute}
@@ -82,8 +86,6 @@ export default function Home({ routes, trips, days  }) {
           </div>
         </div>
 
-
-
       <div>
         {filteredTrips.length === 0 ? (
           <div className="flex justify-center items-center h-64">
@@ -100,6 +102,16 @@ export default function Home({ routes, trips, days  }) {
           ))
         )}
       </div>
+      
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "http://schema.org",
+          "@type": "WebSite",
+          "name": "Bermuda Ferry Schedule",
+          "url": "https://bermudaferries.com",
+        })}
+      </script>
+
     </div>
   );
 }
