@@ -1,7 +1,7 @@
 process.env.NODE_NO_WARNINGS = '1';
 
-import { useEffect, useState } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useState } from 'react';
+import StructuredData from '../components/StructuredData';
 import Airtable from 'airtable';
 import Trip from '../components/Trip';
 import RouteFilter from '../components/RouteFilter';
@@ -53,6 +53,13 @@ export default function Home({ routes, trips, days  }) {
 
   const filteredTrips = arrivalFiltered.filter(trip => trip.fields['Day'].includes(selectedDay))
 
+  const structuredData = {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Bermuda Ferry Schedule",
+    "url": "https://bermudaferries.com",
+  }
+
   return (
     <div>
       <h1 className="text-3xl font-bold text-center my-4">Bermuda Ferry Schedule</h1>
@@ -102,16 +109,7 @@ export default function Home({ routes, trips, days  }) {
           ))
         )}
       </div>
-      
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "http://schema.org",
-          "@type": "WebSite",
-          "name": "Bermuda Ferry Schedule",
-          "url": "https://bermudaferries.com",
-        })}
-      </script>
-
+      <StructuredData data={structuredData} />
     </div>
   );
 }
