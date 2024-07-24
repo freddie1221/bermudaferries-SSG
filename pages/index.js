@@ -62,8 +62,8 @@ export default function Home({ routes, trips, days  }) {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center my-4">Bermuda Ferry Schedule</h1>
-      <p className="text-lg text-center mb-6">
+      <h1 className="text-3xl font-serif font-bold text-center my-4 text-gray-900">Bermuda Ferry Schedule</h1>
+      <p className="text-lg font-serif text-center mb-6 text-gray-700">
         Welcome to the Bermuda ferry schedule for summer 2025. Find up-to-date information on routes, departure times, and services for all Bermuda ferry routes.
       </p>
       <RouteFilter
