@@ -3,10 +3,9 @@ const Airtable = require('airtable');
 module.exports = {
   siteUrl: process.env.SITE_URL || 'https://bermudaferries.com',
   generateRobotsTxt: true,
-  exclude: ['/server-sitemap.xml'],
   robotsTxtOptions: {
-    additionalSitemaps: [
-      'https://bermudaferries.com/server-sitemap.xml',
+    policies: [
+      { userAgent: '*', allow: '/' },
     ],
   },
   additionalPaths: async (config) => {

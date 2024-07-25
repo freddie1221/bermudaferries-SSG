@@ -11,6 +11,7 @@ class MyDocument extends Document {
   <link rel="icon" href="/icons/icon-192x192.png" />
   <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
   <meta name="theme-color" content="#000000" />
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 </Head>
         <body>
           <Main />
