@@ -61,7 +61,7 @@ export default function Home({ routes, trips, days  }) {
   }
 
   return (
-    <div>
+    <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-serif font-bold text-center my-4 text-gray-900">Bermuda Ferry Schedule</h1>
       <p className="text-lg font-serif text-center mb-6 text-gray-700">
         Welcome to the Bermuda ferry schedule for summer 2025. Find up-to-date information on routes, departure times, and services for all Bermuda ferry routes.
@@ -76,23 +76,23 @@ export default function Home({ routes, trips, days  }) {
         selectedDay={selectedDay}
         onSelectDay={setSelectedDay}
       />
-        <div className="flex justify-center">
-          <div className="flex w-full max-w-md">
+      <div className="flex justify-center">
+        <div className="flex w-full max-w-md">
           <TerminalFilter
             terminals={terminals}
             selectedTerminal={selectedTerminal}
             onSelectTerminal={setSelectedTerminal}
-            title = "Departure"
+            title="Departure"
           />
           <TerminalFilter
             terminals={terminals}
             selectedTerminal={selectedArrival}
             onSelectTerminal={setSelectedArrival}
-            title = "Arrival"
+            title="Arrival"
           />
-          </div>
         </div>
-
+      </div>
+  
       <div>
         {filteredTrips.length === 0 ? (
           <div className="flex justify-center items-center h-64">
@@ -111,5 +111,5 @@ export default function Home({ routes, trips, days  }) {
       </div>
       <StructuredData data={structuredData} />
     </div>
-  );
-}
+  )
+} 
